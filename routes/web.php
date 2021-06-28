@@ -26,7 +26,7 @@ $this->get('/gerenciarPerfil', 'DashboardAluno\HomeController@mostrarPaginaGeren
 $this->get('/marcarAtendimento', 'DashboardAluno\HomeController@mostrarPaginaMarcarAtendimento')->name('marcarAtendimento');
 
 // //consulta
-$this->post('/consulta', 'Site\ConsultaController@cadastrarConsulta')->name('consulta.marcar');
+$this->post('/consulta', 'Dashboard\ConsultaController@cadastrarConsulta')->name('consulta.marcar');
 
 //Auth Routes |||||||||
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
