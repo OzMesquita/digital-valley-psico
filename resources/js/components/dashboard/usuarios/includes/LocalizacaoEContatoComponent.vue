@@ -150,8 +150,8 @@
             }
         },
         watch:{
-                // id_pais: 'carregaEstados',
-                // id_estado: 'carregaCidades'
+                 id_pais: 'carregaEstados',
+                 id_estado: 'carregaCidades'
         },
         components:{
             MaskedInput,
@@ -160,13 +160,13 @@
         },
         methods:{
             carregaPaises: function(){
-                return new Promise((resolve, reject)=>{
-                    axios.get(this.baseUrl+'/paises').then(response=>{
+                return new Promise(async (resolve, reject)=>{
+                    axios.get(this.baseUrl +'/paises').then(response=>{
                         this.paises = response.data;
                         this.estados = [];
                         this.cidades = [];
-                        this.id_estado = [];
-                        this.id_cidade = [];
+                        this.id_estado = 0;
+                        this.id_cidade = 0;
                         resolve();
                     });
                 });
@@ -228,11 +228,16 @@
             }
         },
         async mounted(){
+           
+            await this.carregaPaises();
+            this.id_pais = this.old.id_pais != '' ? this.old.id_pais : 30;
 
-            // this.carregaPaises().then(response=>{
-            //     this.id_pais = this.old.id_pais != '' ? this.old.id_pais : 30;
-            // });
+            await this.carregaEstados();
             this.id_estado = this.old.id_estado != '' ? this.old.id_estado : 517;
+
+            await this.carregaCidades();
+            this.id_cidade = this.old.id_cidade != '' ? this.old.id_cidade : 8942 ;
+
             this.endereco = this.old.endereco;
             this.bairro = this.old.bairro;
             this.numero = this.old.numero;

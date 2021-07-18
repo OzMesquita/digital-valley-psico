@@ -162,6 +162,7 @@
             carregaPaises: function(){
                 return new Promise(async (resolve, reject)=>{
                     axios.get(this.url+'/paises').then(response=>{
+                        console.log(response);
                         this.paises = response.data;
                         this.estados = [];
                         this.cidades = [];

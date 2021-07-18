@@ -9,8 +9,6 @@ use App\Models\localizacao\Pais;
 class LocalizacaoController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
-		$this->middleware('funcionario');   
 
     }
 
