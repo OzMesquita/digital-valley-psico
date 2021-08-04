@@ -6,32 +6,40 @@
         <span>&nbsp; Realize seu cadastro como aluno</span>
       </div>
       <div class="card-body">
-        <form action="/realizarCadastro" method="POST">
-          <cabecalho id="cabecalho" :aba="this.aba" />
 
-          <input type="hidden" name="_token" :value="csrf" />
+        <form :action="this.url + 'realizarCadastro'" method="POST">
+          
+          <cabecalho id="cabecalho" :aba="this.aba" ></cabecalho>
+
+          <input type="hidden" name="_token" :value="csrf" >
 
           <informacoes-pessoais
             :mudaAba="this.mudaAba"
             v-show="this.aba == 'informacoesPessoais'"
-            :old="old"
+            :old="this.old"
           />
 
           <informacoes-universitarias
             :cursos="cursos"
             :mudaAba="this.mudaAba"
             v-show="this.aba == 'informacoesUniversitarias'"
-            :old="old"
+            :old="this.old"
           />
 
           <localizacao-e-contato
             :mudaAba="this.mudaAba"
             v-show="this.aba == 'localizacaoEContato'"
-            :old="old"
+            :old="this.old"
             :url="this.url"
           />
+            
+          <dados-de-conta 
+            :mudaAba="this.mudaAba" 
+            v-show="this.aba == 'dadosDeConta'" 
+            :old="this.old"
+          />
 
-          <dados-de-conta :mudaAba="this.mudaAba" v-show="this.aba == 'dadosDeConta'" />
+
         </form>
       </div>
     </div>

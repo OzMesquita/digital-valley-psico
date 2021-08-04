@@ -162,7 +162,6 @@
             carregaPaises: function(){
                 return new Promise(async (resolve, reject)=>{
                     axios.get(this.url+'/paises').then(response=>{
-                        console.log(response);
                         this.paises = response.data;
                         this.estados = [];
                         this.cidades = [];
@@ -184,7 +183,7 @@
             },
             carregaCidades:function(){
                 return new Promise((resolve, reject)=>{
-                    axios.get( this.url + '/cidades/' + this.id_estado).then(response=>{
+                    axios.get( this.url + 'cidades/' + this.id_estado).then(response=>{
                         this.cidades = response.data;
                         resolve();
                     });

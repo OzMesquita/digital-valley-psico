@@ -153,6 +153,7 @@ export default {
 
     this.nome = this.old.nome;
     this.genero = this.old.genero ? this.old.genero : "m";
+    this.dataNascimento = this.old.data_nascimento;
   }
 };
 </script>

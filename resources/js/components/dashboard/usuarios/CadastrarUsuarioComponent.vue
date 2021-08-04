@@ -19,13 +19,30 @@
                     <input type="hidden" name="_token" :value="csrf">
 
 
-                    <informacoes-pessoais  :mudaAba="this.mudaAba"  v-show="this.aba == 'informacoesPessoais'" :old="this.old"/>
+                    <informacoes-pessoais  
+                        :mudaAba="this.mudaAba"  
+                        v-show="this.aba == 'informacoesPessoais'" 
+                        :old="this.old"
+                    />
 
-                    <informacoes-profissionais  :mudaAba="this.mudaAba" v-show="this.aba == 'informacoesProfissionais'" :old="this.old" />
+                    <informacoes-profissionais  
+                        :mudaAba="this.mudaAba" 
+                        v-show="this.aba == 'informacoesProfissionais'" 
+                        :old="this.old" 
+                    />
 
-                    <localizacao-e-contato :mudaAba="this.mudaAba" v-show="this.aba == 'localizacaoEContato'" :old="this.old" :baseUrl="this.baseUrl"/>
+                    <localizacao-e-contato 
+                        :mudaAba="this.mudaAba" 
+                        v-show="this.aba == 'localizacaoEContato'" 
+                        :old="this.old" 
+                        :baseUrl="this.baseUrl"
+                    />
 
-                    <dados-de-conta :mudaAba="this.mudaAba" v-show="this.aba == 'dadosDeConta'" :old="old"/>
+                    <dados-de-conta 
+                        :mudaAba="this.mudaAba" 
+                        v-show="this.aba == 'dadosDeConta'" 
+                        :old="old"
+                    />
                 </form>
 
             </div>
