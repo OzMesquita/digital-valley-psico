@@ -18,10 +18,12 @@ class AlunoController extends Controller
 
     public function mostrarFormularioCadastrarAluno(Request $request)
     {
-       // dd(!$request->session()->get('dadosPedido') && !$request->session()->get('_old_input'));
+    
+       //dd(!$request->session()->get('dadosPedido') && !$request->session()->get('_old_input'));
         if(!$request->session()->get('dadosPedido') && !$request->session()->get('_old_input'))
             return redirect('/pedidoCadastro')->withErrors(['credenciais' => 'Informe os dados abaixo para acessar o cadastro de aluno.'])->withInput();
-
+    
+        
         return view('guest.pages.cadastrar-aluno',['cursos' => Curso::all(), 'base_url' => env('APP_URL'), 'dadosPedido' => $request->session()->get('dadosPedido')]);   
     }
     
@@ -52,7 +54,7 @@ class AlunoController extends Controller
                 if(count($data) > 0){
                     $data = $data[0];
                     if($data->matricula == $request->matricula && strtoupper($data->nome) == strtoupper($request->nome)){
-                        return redirect('/realizarCadastro')->with(['dadosPedido' => ['nome' => $data->nome, 'matricula' => $data->matricula]]);
+                        return redirect('/realizarCadastro')->with(session(['dadosPedido' => ['nome' => $data->nome, 'matricula' => $data->matricula]]));
                     }else{
                         return redirect()->back()->withErrors(['credenciais' => 'O nome do aluno informado é inválido'])->withInput();
                     }   
