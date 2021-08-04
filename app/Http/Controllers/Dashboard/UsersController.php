@@ -21,7 +21,7 @@ class UsersController extends Controller
     }
 	
 	public function formularioCriarUsuarios(){
-		return view('auth.pages.registrar-funcionario.registrar-funcionario', ['paises' => Pais::all(), 'base_url' => config('app.url') ]);
+		return view('auth.pages.registrar-funcionario.registrar-funcionario', ['paises' => Pais::all(), 'base_url' => env('APP_URL') ]);
 	}
 
     public function formularioEditarUsuario(Request $request, $id){
@@ -31,9 +31,8 @@ class UsersController extends Controller
         $func->usuario->endereco->toArray();
         $func->usuario->endereco->cidade->toArray();
         $func->usuario->endereco->cidade->estado->toArray();
-        $func->usuario->endereco->cidade->estado->pais->toArray();
         $func->usuario->contatos->toArray();
-		return view('auth.pages.editar-funcionario.editar-funcionario', ['funcionario' => $func, 'base_url' => config('app.url') ]);
+		return view('auth.pages.editar-funcionario.editar-funcionario', ['funcionario' => $func, 'base_url' => env('APP_URL') ]);
 	}
     
     public function atualizaUsuario(Request $request, $tipo){
