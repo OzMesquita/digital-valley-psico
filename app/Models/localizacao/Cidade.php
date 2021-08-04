@@ -2,6 +2,7 @@
 
 namespace App\Models\localizacao;
 
+use App\Models\endereco\Endereco;
 use Illuminate\Database\Eloquent\Model;
 
 class Cidade extends Model
@@ -20,6 +21,9 @@ class Cidade extends Model
 	];
 
 	public function estado(){
-		return $this->hasOne(Estado::class, 'id' , 'state_id');
+		return $this->belongsTo(Estado::class, 'state_id' , 'id');
+	}
+	public function endereco(){
+		return $this->belongsTo(Endereco::class, 'id_cidade' , 'id');
 	}
 }

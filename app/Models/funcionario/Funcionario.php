@@ -3,6 +3,7 @@
 namespace App\Models\funcionario;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\usuarios\Usuario;
 
 class Funcionario extends Model
 {
@@ -26,7 +27,8 @@ class Funcionario extends Model
     }
 
     public function usuario(){
-        return $this->hasOne('\App\Models\usuarios\Usuario', 'id', 'id_usuario');
+        return $this->belongsTo(Usuario::class, 'id_usuario');
+        //return $this->hasOne('\App\Models\usuarios\Usuario', 'id', 'id_usuario');
     }
 
 }

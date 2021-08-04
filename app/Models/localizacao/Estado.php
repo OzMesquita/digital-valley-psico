@@ -17,11 +17,11 @@ class Estado extends Model
 	];
 
 	public function cidades(){
-		return $this->hasMany('App\Models\localizacao\Cidade', 'state_id', 'id');
+		return $this->hasMany(Cidade::class, 'state_id', 'id');
 	}
 
 	public function pais(){
-	    return $this->hasOne(Pais::class, 'id', 'country_id');
+	    return $this->belongsTo(Pais::class, 'id', 'country_id');
     }
 
 }

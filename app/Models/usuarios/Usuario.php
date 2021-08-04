@@ -2,7 +2,7 @@
 
 namespace App\Models\usuarios;
 
-
+use App\Http\Middleware\Funcionario;
 use App\Models\contato\Contato;
 use App\Models\endereco\Endereco;
 use Illuminate\Database\Eloquent\Model;
@@ -54,4 +54,10 @@ class Usuario extends Authenticatable
     {
         return $this->hasOne(Aluno::class, 'id_usuario');
     }
+
+    public function funcionario()
+    {
+        return $this->hasOne(Funcionario::class, 'id_usuario');
+    }
+
 }

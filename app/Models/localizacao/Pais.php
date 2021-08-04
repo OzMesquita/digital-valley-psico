@@ -20,7 +20,7 @@ class Pais extends Model
 	];
 
 	public function estados(){
-		return $this->hasMany('App\Models\localizacao\Estado', 'country_id', 'id');	
+		return $this->hasMany(Estado::class, 'country_id', 'id');	
 	}
 
 
