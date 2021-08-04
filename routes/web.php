@@ -16,8 +16,8 @@ $this->get('/', function (){
 $this->get('/pedidoCadastro', 'Site\AlunoController@mostrarformularioPedidoCadastro');
 $this->post('/pedidoCadastro', 'Site\AlunoController@verificarPedidoCadastro')->name('verificarPedidoCadastro');
 $this->get('/realizarCadastro', 'Site\AlunoController@mostrarFormularioCadastrarAluno');
-$this->post('/realizarCadastro', 'Aluno\RegistrarAlunoController@registrarAluno');
-$this->get("/solicitarCadastro", 'Site\AlunoController@mostrarFormularioSolicitarCadastro')->name("solicitarCadastro");
+$this->post('/realizarCadastro', 'Aluno\RegistrarAlunoController@registrarAluno')->name('registrarAluno');
+//$this->get("/solicitarCadastro", 'Site\AlunoController@mostrarFormularioSolicitarCadastro')->name("solicitarCadastro");
 
 //Auth::routes();
 
