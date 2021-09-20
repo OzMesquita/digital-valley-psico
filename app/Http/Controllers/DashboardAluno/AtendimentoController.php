@@ -38,17 +38,17 @@ class AtendimentoController extends Controller
 
         $confirmacao = Atendimento::create($atendimento);
         #controller
-        $user = Funcionario::find($request->get('id_psicologo'))->usuario;
-        foreach ($user->contatos as $cont) {
-            if ($cont->tipo == 'email') {
-                $atendimento['nome_psicologo'] = $user->nome_completo;
-                $atendimento['nome_aluno'] = Auth::user()->nome_completo;
-                $horario = HorarioSemana::find($request->get('id_horario'));
-                $atendimento['dia'] = $horario->dia;
-                $atendimento['hora'] = $horario->horario;
-                Mail::to($cont->contato)->send(new SendMailPsicologo($atendimento));
-            }
-        }
+        // $user = Funcionario::find($request->get('id_psicologo'))->usuario;
+        // foreach ($user->contatos as $cont) {
+        //     if ($cont->tipo == 'email') {
+        //         $atendimento['nome_psicologo'] = $user->nome_completo;
+        //         $atendimento['nome_aluno'] = Auth::user()->nome_completo;
+        //         $horario = HorarioSemana::find($request->get('id_horario'));
+        //         $atendimento['dia'] = $horario->dia;
+        //         $atendimento['hora'] = $horario->horario;
+        //         Mail::to($cont->contato)->send(new SendMailPsicologo($atendimento));
+        //     }
+        // }
 
         return response()->json($confirmacao, 200);
     }
