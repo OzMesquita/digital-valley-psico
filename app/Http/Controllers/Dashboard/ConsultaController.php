@@ -13,7 +13,7 @@ use App\Serializers\JsonDataSerializer;
 use App\Models\aluno\Aluno;
 use App\Models\horarios\HorarioSemana;
 use App\Mail\SendMailAluno;
-
+use App\Models\usuarios\Usuario;
 use League\Fractal\Manager as FractalManager;
 use League\Fractal\Resource\Collection as FractalCollection;
 
@@ -26,18 +26,18 @@ class ConsultaController extends Controller
 
     public function mostarPaginaConsultas()
     {
-        return view('auth.pages.calendario', ['base_url' => config('app.url')]);
+        return view('auth.pages.calendario', ['base_url' => env('APP_URL')]);
     }
 
     public function listarAtendimentos()
     {
-        $atendimentos = Atendimento::select("atendimento.id", "usuario.nome_completo as nome", "aluno.matricula", 'horario_semana.horario', 'horario_semana.dia', 'atendimento.status', 'atendimento.encaminhamento', 'atendimento.motivo')->
-        where("id_psicologo", Auth::user()->id)
-            ->join("horario_semana", 'atendimento.id_horario', '=', 'horario_semana.id')
-            ->join('aluno', 'atendimento.id_aluno', '=', 'aluno.id')
-            ->join('usuario', 'aluno.id_usuario', '=', 'usuario.id')
-            ->get();
 
+         $atendimentos = Atendimento::select("atendimento.id", "usuario.nome_completo as nome", "aluno.matricula", 'horario_semana.horario', 'horario_semana.dia', 'atendimento.status', 'atendimento.encaminhamento', 'atendimento.motivo')
+              ->join("horario_semana", 'atendimento.id_horario', '=', 'horario_semana.id')
+              ->join('aluno', 'atendimento.id_aluno', '=', 'aluno.id')
+              ->join('usuario', 'aluno.id_usuario', '=', 'usuario.id')
+              ->get();
+        
         $horarios = [
             'a' => ["08:00", "09:00"],
             'b' => ["09:00", "10:00"],
@@ -53,7 +53,7 @@ class ConsultaController extends Controller
 
         $fractalManager = new FractalManager();
         $fractalManager->setSerializer(new JsonDataSerializer);
-
+        
         $resource = new FractalCollection($atendimentos->toArray(), function ($atendimento) use ($horarios) {
             return [
                 'id_atendimento' => $atendimento['id'],
@@ -67,13 +67,16 @@ class ConsultaController extends Controller
                 'color' => ($atendimento['status'] == 'cancelado') ? '#dc3545' : (($atendimento['status'] == 'ocorrido') ? '#28a745' : '#6c757d'),
             ];
         });
-
-        $atendimentos = $fractalManager->createData($resource)->toArray();
-        return response()->json($atendimentos);
+        
+        $json = $fractalManager->createData($resource)->toArray();
+        
+        
+        return response()->json($json);
     }
 
     public function listarAtendimentosAluno(Request $request)
     {
+        
         $horarios = [
             'a' => "08:00 às 09:00",
             'b' => "09:00 às 10:00",
@@ -91,9 +94,12 @@ class ConsultaController extends Controller
             ->join('usuario', 'funcionario.id_usuario', '=', 'usuario.id')
             ->join('horario_semana', 'atendimento.id_horario', '=', 'horario_semana.id')
             ->where('id_aluno', '=', 13)->get();
-
+            
         foreach ($atendimento as $atend)
             $atend->horario = $horarios[$atend->horario];
+
+            
+
         return response()->json($atendimento, 200);
     }
 
