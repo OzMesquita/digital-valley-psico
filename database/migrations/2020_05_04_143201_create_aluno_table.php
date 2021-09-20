@@ -31,7 +31,7 @@ class CreateAlunoTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('aluno');
+		Schema::dropIfExists('aluno');
 	}
 
 }
