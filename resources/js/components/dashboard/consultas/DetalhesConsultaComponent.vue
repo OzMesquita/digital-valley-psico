@@ -36,7 +36,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="(obs, index) in observacoes">
+                                        <tr v-for="(obs, index)  in observacoes" v-bind:key="index" >
                                             <td class="tg-0lax">{{ obs.observacao }}</td>
                                             <td class="tg-0lax text-center">
                                                 {{ formatarData(obs.created_at) }}
